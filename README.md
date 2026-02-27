@@ -1,171 +1,95 @@
+---
 
+# 📌 Day 9 – Recommendation System Visualization (README Text)
+
+## 🎯 Objective
+
+The goal of Day 9 was to build a **Recommendation System** using ALS (Alternating Least Squares) and generate Top-5 product recommendations for each customer.
 
 ---
 
-# 🚀 14 Days AI Challenge – Databricks ML Pipeline Project
+## 🔹 Step 1: Rating Mapping
 
-## 📌 Project Overview
+We created a rating dataset using:
 
-This project demonstrates a complete end-to-end Machine Learning pipeline built on **Databricks + PySpark**.
+* `customerID` → User
+* `productIndex` → Item
+* `quantity` → Rating
 
-It includes:
-
-* Feature Engineering
-* Model Training
-* MLflow Experiment Tracking
-* Batch Inference Pipeline
-* Recommendation System (ALS)
-* Workflow Pipeline Automation
-
-This project simulates a **real-world production ML system**.
+This converts transaction data into a **user-item interaction matrix** required for collaborative filtering.
 
 ---
 
-# 🏗️ Architecture Overview
+## 🔹 Step 2: Train ALS Model
 
-1. Raw Transaction Data (Delta Table)
-2. Data Processing & Feature Engineering
-3. Model Training (Spark MLlib)
-4. MLflow Tracking
-5. Batch Predictions
-6. Recommendation System (Collaborative Filtering)
-7. Workflow Automation using Databricks Jobs
+We trained an ALS model with:
 
----
+* `userCol = customerID`
+* `itemCol = productIndex`
+* `ratingCol = rating`
+* `coldStartStrategy = "drop"`
 
-# 📅 Day-wise Implementation
+ALS learns hidden patterns between customers and products using **collaborative filtering**.
 
 ---
 
-## ✅ Day 6 – Model Training & Tuning
+## 🔹 Step 3: Generate Top-5 Recommendations
 
-* Trained Logistic Regression
-* Trained Random Forest
-* Performed Hyperparameter Tuning
-* Evaluated model using AUC
-* Compared model performance
+After training, we generated:
 
-Technology Used:
+* Predicted ratings for products
+* Ranked products per customer
+* Selected Top-5 highest predicted products
 
-* PySpark MLlib
-* Spark DataFrame
-* Evaluation Metrics
+Final Output Columns:
 
----
-
-## ✅ Day 7 – MLflow Experiment Tracking
-
-* Logged parameters
-* Logged metrics
-* Logged trained model
-* Compared multiple experiment runs
-
-Used:
-
-* MLflow Tracking
-* Experiment Versioning
+* `customerID`
+* `productIndex`
+* `prediction`
+* `rank`
 
 ---
 
-## ✅ Day 8 – Batch Inference Pipeline
+# 📊 Visualization (Day 9)
 
-Tasks Completed:
+### 1️⃣ Bar Chart – Top 5 Recommendations
 
-1. Scored all users
-2. Saved predictions to Gold Delta Table
-3. Identified Top Predicted Buyers
+This visualization shows:
 
-Implemented:
+* X-axis → Product Index
+* Y-axis → Predicted Rating
+* Each bar → Strength of recommendation
 
-* Batch scoring using trained model
-* Delta Table storage
-* Aggregation & ranking logic
+It helps understand which products the model recommends most strongly.
 
 ---
 
-## ✅ Day 9 – Recommendation System (ALS)
+### 2️⃣ Distribution Plot – Prediction Scores
 
-Built a Collaborative Filtering Model using ALS.
+This plot shows:
 
-Steps:
-
-1. Converted product names to numeric indices using StringIndexer
-2. Created user-item rating mapping
-3. Aggregated purchase history as implicit ratings
-4. Trained ALS model
-5. Generated Top-5 product recommendations per customer
-6. Ranked recommendations using Window Functions
-
-Concepts Covered:
-
-* Collaborative Filtering
-* User-Item Interaction Matrix
-* Cold Start Handling
-* Recommendation Ranking
+* Distribution of predicted ratings
+* Model confidence level
+* Whether predictions are spread or concentrated
 
 ---
 
-# 🔄 Databricks Workflow Pipeline
+# 💡 What This Visualization Proves
 
-All tasks are connected using **Databricks Workflows**.
-
-Execution Flow:
-
-Day 6 → Day 7 → Day 8 → Day 9
-
-This simulates a production ML pipeline where:
-
-* Models are trained
-* Experiments tracked
-* Predictions generated
-* Recommendations produced
-
-Automatically.
+✔ Model successfully trained
+✔ Recommendations generated per user
+✔ Ranking logic working
+✔ Model prediction strength visible
 
 ---
 
-# 🛠️ Tech Stack
+# 🏆 Day 9 Status
 
-* Databricks
-* Apache Spark
-* PySpark
-* Spark MLlib
-* MLflow
-* Delta Lake
-* Python
-* Matplotlib / Seaborn (Visualization)
+✅ Rating Mapping Created
+✅ ALS Model Trained
+✅ Top-5 Recommendations Generated
+✅ Visualization Completed
 
 ---
-
-# 📊 Key Learnings
-
-* How real ML pipelines are built in industry
-* Importance of experiment tracking
-* Batch inference architecture
-* Recommendation system implementation
-* Workflow automation in Databricks
-
----
-
-# 🎯 Project Outcome
-
-This project demonstrates:
-
-✔ End-to-end ML lifecycle
-✔ Scalable data processing
-✔ Model training & tracking
-✔ Production-style recommendation system
-✔ Automated workflow pipeline
-
----
-
-# 🔗 Author
-
-Nandini Wadile
-B.Tech – Artificial Intelligence & Data Science
-Aspiring Data Scientist / ML Engineer
-
----
-
 
 
